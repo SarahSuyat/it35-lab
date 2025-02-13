@@ -18,7 +18,7 @@ const Home: React.FC = () => {
           <IonMenuButton ></IonMenuButton>
             </IonButtons>
             <IonTitle>Home</IonTitle>
-            <IonTitle size="large">Blank</IonTitle>
+            <IonTitle size="large"></IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
