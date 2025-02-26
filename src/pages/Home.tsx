@@ -27,7 +27,7 @@ const Home: React.FC = () => {
   const tabs =[
     {name:'Feed',tab:'feed',url:'/it35-lab/app/home/feed', icon:bookOutline},
     {name:'Search',tab:'search',url:'/it35-lab/app/home/search', icon:search},
-    {name:'Favorites',tab:'favorites',url:'/it35-lab/app/home/favotites', icon:star},
+    {name:'Favorites',tab:'favorites',url:'/it35-lab/app/home/favorites', icon:star},
   ]
 
   return (
