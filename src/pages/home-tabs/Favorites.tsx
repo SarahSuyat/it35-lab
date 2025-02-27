@@ -29,7 +29,7 @@ import {
               height: '100%',
             }}
             >
-            Favorites
+        
           </div>
         </IonContent>
       </IonPage>
