@@ -21,6 +21,7 @@ import {
           </IonToolbar>
         </IonHeader>
         <IonContent fullscreen>
+       
         </IonContent>
       </IonPage>
     );

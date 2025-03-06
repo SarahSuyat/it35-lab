@@ -26,16 +26,19 @@ import {
             <IonTitle>Login</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonItem>
+          <IonInput label="Email" type="email" placeholder=""></IonInput>
+        </IonItem>
+
+        <IonItem>
+          <IonInput label="Password" type="password" value=""></IonInput>
+        </IonItem>
+
         <IonContent className= 'ion-padding'>
             <IonButton onClick={() => doLogin()} expand="full">
                 Login
             </IonButton>
-            <IonItem>
-        <IonInput label="Email input" type="email" placeholder="email@domain.com"></IonInput>
-      </IonItem>
-      <IonInput type="password" label="Password" value="NeverGonnaGiveYouUp">
-      <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-    </IonInput>
+            
     
         </IonContent>
       </IonPage>
