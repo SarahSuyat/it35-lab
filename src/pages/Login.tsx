@@ -1,37 +1,57 @@
 
 import { 
-    IonButton,
-    IonButtons,
-      IonContent, 
-      IonHeader, 
-      IonMenuButton, 
-      IonPage, 
-      IonTitle, 
-      IonToolbar ,
-      useIonRouter
-  } from '@ionic/react';
-  
-  const Login: React.FC = () => {
-    const navigation = useIonRouter();
+  IonButton,
+  IonButtons,
+    IonContent, 
+    IonHeader, 
+    IonMenuButton, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar ,
+    IonInput, IonItem, IonList,
+    useIonRouter,
+    IonInputPasswordToggle
+} from '@ionic/react';
 
-    const doLogin = () => {
-        navigation.push('/it35-lab/app','forward','replace');
+const Login: React.FC = () => {
+  const navigation = useIonRouter();
 
-    }
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Login</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent className= 'ion-padding'>
-            <IonButton onClick={() => doLogin()} expand="full">
-                Login
-            </IonButton>
-        </IonContent>
-      </IonPage>
-    );
-  };
+  const doLogin = () => {
+      navigation.push('/it35-lab/app','forward','replace');
+
+  }
+  return (
+    <IonPage>
+      
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle >Login</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonItem>
+      <IonInput label="Email" labelPlacement="floating" placeholder="Enter email"></IonInput>
+      </IonItem>
+
+      <IonItem>
+        <IonInput label="Password" labelPlacement="floating" placeholder="Enter password">   
+        <IonInputPasswordToggle slot="end"></IonInputPasswordToggle> 
+        </IonInput>
+      
+      </IonItem>
+
+      <IonContent className= 'ion-padding'>
+          <IonButton onClick={() => doLogin()} expand="full">
+              Login
+          </IonButton>
+
+          <IonButton onClick={() => doLogin()} expand="full">
+              Sign up
+          </IonButton>
+          
   
-  export default Login;
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default Login;
