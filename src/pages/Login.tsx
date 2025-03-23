@@ -10,16 +10,23 @@ import {
     IonToolbar ,
     IonInput, IonItem, IonList,
     useIonRouter,
-    IonInputPasswordToggle
+    IonInputPasswordToggle,
+    IonIcon
 } from '@ionic/react';
+import { logoIonic } from 'ionicons/icons';
 
 const Login: React.FC = () => {
   const navigation = useIonRouter();
 
   const doLogin = () => {
       navigation.push('/it35-lab/app','forward','replace');
+    };
 
-  }
+    const goToRegister = () => {
+      navigation.push('/register'); //  Navigate to Register
+    };
+
+  
   return (
     <IonPage>
       
@@ -28,6 +35,7 @@ const Login: React.FC = () => {
           <IonTitle >Login</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonItem>
       <IonInput label="Email" labelPlacement="floating" placeholder="Enter email"></IonInput>
       </IonItem>
@@ -36,7 +44,6 @@ const Login: React.FC = () => {
         <IonInput label="Password" labelPlacement="floating" placeholder="Enter password">   
         <IonInputPasswordToggle slot="end"></IonInputPasswordToggle> 
         </IonInput>
-      
       </IonItem>
 
       <IonContent className= 'ion-padding'>
@@ -44,7 +51,7 @@ const Login: React.FC = () => {
               Login
           </IonButton>
 
-          <IonButton onClick={() => doLogin()} expand="full">
+          <IonButton onClick={() => goToRegister()} expand="full">
               Sign up
           </IonButton>
           
