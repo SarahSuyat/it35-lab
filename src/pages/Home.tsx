@@ -20,7 +20,7 @@ import { bookOutline, search, star } from 'ionicons/icons';
 import Feed from './home-tabs/Feed';
 import Search from './home-tabs/Search';
 import Favorites from './home-tabs/Favorites';
-import { Route } from 'react-router';
+import { Redirect, Route } from 'react-router';
 
 
 const Home: React.FC = () => {
@@ -46,6 +46,10 @@ const Home: React.FC = () => {
        <Route exact path="/it35-lab/app/home/feed" render={Feed}/>
        <Route exact path="/it35-lab/app/home/search" render={Search}/>
        <Route exact path="/it35-lab/app/home/favorites" render={Favorites}/>
+
+       <Route exact path="/it35-lab/app/home">
+            <Redirect to="/it35-lab/app/home/feed" />
+          </Route>
      </IonRouterOutlet>
      </IonTabs>
    </IonReactRouter>
