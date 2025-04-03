@@ -1,116 +1,184 @@
-import {
+import { 
   IonButton,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  useIonRouter,
-  IonToast, // Import IonToast
-} from "@ionic/react";
-import { useState } from "react";
+  IonButtons,
+    IonCard,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonContent, 
+    IonHeader, 
+    IonInput, 
+    IonInputPasswordToggle, 
+    IonMenuButton, 
+    IonModal, 
+    IonPage, 
+    IonText, 
+    IonTitle, 
+    IonToolbar 
+} from '@ionic/react';
+import { useState } from 'react';
+
 
 const Register: React.FC = () => {
-  const navigation = useIonRouter();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showToast, setShowToast] = useState(false); // State to control the toast visibility
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showVerificationModal, setShowVerificationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const doRegister = () => {
-    // Basic validation for password match
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    // Show the toast after successful registration
-    setShowToast(true);
-
-    // Log the user information (you can replace this with actual registration logic)
-    console.log("Register button clicked");
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-
-    // After successful registration, navigate to the login page (or home page)
-    setTimeout(() => {
-      navigation.push("/login", "forward", "replace"); // Navigate to login page
-    }, 2000); // 2-second delay to show the toast
+  const handleOpenVerificationModal = () => {
+      
+      setShowVerificationModal(true);
   };
 
-  const navigateToLogin = () => {
-    navigation.push("/login"); // Navigate back to Login page
+   const doRegister = async () => {
+      
+      setShowVerificationModal(false);
+      
+      setShowSuccessModal(true);
   };
-
+  
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Register</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>
-          <IonLabel position="stacked">Username</IonLabel>
+      <IonPage>
+           
+      <IonContent className='ion-padding'>
+          <h1>Create your account</h1>
+         
           <IonInput
-            value={username}
-            onIonChange={(e) => setUsername(e.detail.value!)}
-            placeholder="Enter username"
+              style={{
+                  marginTop:'20px',
+              }}
+              label="Username" 
+              labelPlacement="stacked"
+              fill="outline"
+              type="text"
+              placeholder="username"
+              value={username}
+              onIonChange={e => setUsername(e.detail.value!)}
           />
-        </IonItem>
-
-        <IonItem>
-          <IonLabel position="stacked">Email</IonLabel>
           <IonInput
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value!)}
-            placeholder="Enter email"
+              style={{
+                  marginTop:'15px',
+              }}
+              label="Email" 
+              labelPlacement="stacked" 
+              fill="outline"
+              type="email"
+              placeholder="email"
+              value={email}
+              onIonChange={e => setEmail(e.detail.value!)}
           />
-        </IonItem>
-
-        <IonItem>
-          <IonLabel position="stacked">Password</IonLabel>
           <IonInput
-            type="password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value!)}
-            placeholder="Enter password"
-          />
-        </IonItem>
-
-        <IonItem>
-          <IonLabel position="stacked">Confirm Password</IonLabel>
+              style={{
+                  marginTop:'15px',
+              }}
+              label="Password" 
+              labelPlacement="stacked"
+              fill="outline"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onIonChange={e => setPassword(e.detail.value!)}
+          >
+          <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+          </IonInput>
           <IonInput
-            type="password"
-            value={confirmPassword}
-            onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-            placeholder="Confirm your password"
-          />
-        </IonItem>
+              style={{
+                  marginTop:'15px',
+              }}
+              label="Confirm Password" 
+              labelPlacement="stacked"
+              fill="outline"
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onIonChange={e => setConfirmPassword(e.detail.value!)}
+          >
+              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+          </IonInput>
+          <IonButton
+              style={{
+                  marginTop:'15px',
+              }} 
+              onClick={handleOpenVerificationModal} expand="full" shape='round'>
+              Register
+          </IonButton>
+          <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape='round'>
+            Already have an account? Sign-in
+          </IonButton>
 
-        <IonButton onClick={doRegister} expand="full">
-          Register
-        </IonButton>
+          {/* Verification Modal */}
+          <IonModal isOpen={showVerificationModal} onDidDismiss={() => setShowVerificationModal(false)}>
+              <IonToolbar className="ion-text-center" color="primary">
+                  <IonTitle>Confirm Registration</IonTitle>
+              </IonToolbar>
+              <IonContent className="ion-padding">
+                 
+                   <IonCard style={{
+                      marginTop:'25%'
+                      }}
+                      className="ion-padding">
+                      <IonCardHeader>
+                          <IonCardTitle><h3>User Registration Details</h3></IonCardTitle>
+                          <hr></hr>
 
-        {/* IonToast component to show the success message */}
-        <IonToast
-          isOpen={showToast}
-          message="Account Created Successfully!"
-          duration={2000} // Show for 2 seconds
-          onDidDismiss={() => setShowToast(false)} // Hide toast after it is dismissed
-        />
+                          <IonCardSubtitle>Username</IonCardSubtitle>
+                          <IonCardTitle>{username}</IonCardTitle>
 
-        {/* Button to navigate to Login page */}
-        <IonButton onClick={navigateToLogin} expand="full" color="secondary">
-          Already have an account? Login
-        </IonButton>
+                          <IonCardSubtitle>Email</IonCardSubtitle>
+                          <IonCardTitle>{email}</IonCardTitle>
+
+                      </IonCardHeader>
+ 
+                      <div style={{
+                          display:'flex',
+                          justifyContent:'flex-end',
+                          marginRight:'5px',
+                      }}>
+                          <IonButton 
+                              fill="clear"
+                              onClick={() => setShowVerificationModal(false)}
+                          >Cancel</IonButton>
+
+                          <IonButton
+                              className='ion-text-white'
+                              color="primary"
+                              onClick={doRegister} 
+                          >Confirm
+                          </IonButton>
+                      </div> 
+
+                  </IonCard>
+                 
+              </IonContent>
+          </IonModal>
+
+          {/* Success Modal */}
+          <IonModal isOpen={showSuccessModal} onDidDismiss={() => setShowSuccessModal(false)}  color="primary">
+              <IonContent className="ion-padding" style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh',
+                  textAlign: 'center',
+                  marginTop:'35%'
+              }}>
+                  <IonTitle style={{
+                      marginTop:'35%'
+                  }}>Registration Successful 🎉</IonTitle>
+                  <IonText>
+                      <p>Your account has been created successfully.</p>
+                      <p>Please check your email address.</p>
+                  </IonText>
+                  <IonButton routerLink="/it35-lab" routerDirection="back" color="primary">
+                      Go to Login
+                  </IonButton>
+              </IonContent>
+          </IonModal>
       </IonContent>
-    </IonPage>
+  </IonPage>
   );
 };
 
