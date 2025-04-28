@@ -17,8 +17,6 @@ import {
 } from '@ionic/react';
 import { supabase } from '../utils/supabaseClient';
 import bcrypt from 'bcryptjs';
-import craft from "../images/craft.jpg";
-
 
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
@@ -89,7 +87,7 @@ const Register: React.FC = () => {
         <div style={{
           height: '100vh',
           width: '100%',
-          background: 'linear-gradient(to right,rgb(192, 153, 103),rgb(194, 170, 122))',
+          backgroundImage: `url('https://images.wallpaperscraft.com/image/single/branch_bottle_necklace_199652_1280x720.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           position: 'relative',
@@ -100,7 +98,7 @@ const Register: React.FC = () => {
           <div style={{
             position: 'absolute',
             inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.6)',
             backdropFilter: 'blur(6px)',
             zIndex: 0,
           }}></div>
@@ -108,73 +106,49 @@ const Register: React.FC = () => {
           <div style={{
             position: 'relative',
             zIndex: 1,
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '30px',
-            padding: '0px',
-            paddingRight: '30px',
-            backgroundColor: 'rgba(15, 15, 15, 0.73)',
+            backgroundColor: 'rgba(0, 0, 0, 0.81)',
             borderRadius: '25px',
+            padding: '20px',
+            width: '90%',
+            maxWidth: '500px',
             boxShadow: '0 8px 24px rgba(0, 0, 0, 0.56)',
             backdropFilter: 'blur(10px)',
             color: '#fff',
-            maxWidth: '990px',
-            maxHeight: '600px',
-            width: '95%',
           }}>
-            <div style={{
-              flex: '1',
-              display: 'flex',
-              justifyContent: 'left',
-              alignItems: 'left',
+            <h1 style={{
+              textAlign: 'center',
+              fontSize: '2.3rem',
+              fontWeight: 'bold',
+              color: '#ffe7ba',
+              fontFamily: 'Handlee, cursive',
+              textShadow: '1px 1px 3px black',
+              marginBottom: '20px',
             }}>
-              <img
-                src={craft}
-                alt="Craft image"
-                style={{
-                maxWidth: '1000px',
-                maxHeight: '600px',
-                borderRadius: '20px',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-                objectFit: 'cover'
-                
-             }}
-/>
-            </div>
+              Create Account
+            </h1>
 
-            <div style={{ flex: '2' }}>
-              <h1 style={{
-                textAlign: 'center',
-                fontSize: '2.3rem',
-                fontWeight: 'bold',
-                color: '#ffe7ba',
-                fontFamily: 'Handlee, cursive',
-                textShadow: '1px 1px 3px black',
-                marginBottom: '1px',
-                marginTop: '25px',
-              }}>Create Your Account</h1>
+            <IonInput label="Username" labelPlacement="stacked" fill="outline" value={username} onIonChange={e => setUsername(e.detail.value!)} style={{ marginBottom: '12px' }} />
+            <IonInput label="First Name" labelPlacement="stacked" fill="outline" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} style={{ marginBottom: '12px' }} />
+            <IonInput label="Last Name" labelPlacement="stacked" fill="outline" value={lastName} onIonChange={e => setLastName(e.detail.value!)} style={{ marginBottom: '12px' }} />
+            <IonInput label="Email" labelPlacement="stacked" fill="outline" type="email" value={email} onIonChange={e => setEmail(e.detail.value!)} style={{ marginBottom: '12px' }} />
+            <IonInput label="Password" labelPlacement="stacked" fill="outline" type="password" value={password} onIonChange={e => setPassword(e.detail.value!)} style={{ marginBottom: '12px' }}>
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
+            <IonInput label="Confirm Password" labelPlacement="stacked" fill="outline" type="password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} style={{ marginBottom: '20px' }}>
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
 
-              <IonInput label="Username" labelPlacement="stacked" fill="outline" value={username} onIonChange={e => setUsername(e.detail.value!)} style={{ marginBottom: '12px', marginTop: '20px',  }} />
-              <IonInput label="First Name" labelPlacement="stacked" fill="outline" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} style={{ marginBottom: '12px' }} />
-              <IonInput label="Last Name" labelPlacement="stacked" fill="outline" value={lastName} onIonChange={e => setLastName(e.detail.value!)} style={{ marginBottom: '12px' }} />
-              <IonInput label="Email" labelPlacement="stacked" fill="outline" type="email" value={email} onIonChange={e => setEmail(e.detail.value!)} style={{ marginBottom: '12px' }} />
-              <IonInput label="Password" labelPlacement="stacked" fill="outline" type="password" value={password} onIonChange={e => setPassword(e.detail.value!)} style={{ marginBottom: '12px' }}>
-                <IonInputPasswordToggle slot="end" />
-              </IonInput>
-              <IonInput label="Confirm Password" labelPlacement="stacked" fill="outline" type="password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} style={{ marginBottom: '20px' }}>
-                <IonInputPasswordToggle slot="end" />
-              </IonInput>
+            <IonButton expand="full" shape="round" onClick={handleOpenVerificationModal} style={{ marginBottom: '10px' }}>
+              Register
+            </IonButton>
 
-              <IonButton expand="full" shape="round" onClick={handleOpenVerificationModal} style={{ marginBottom: '10px' }}>
-                Register
-              </IonButton>
-              <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape="round" style={{ color: '#ffc069' }}>
-                Already have an account? Sign in
-              </IonButton>
-            </div>
+            <IonButton routerLink="/it35-lab" expand="full" fill="clear" shape="round" style={{ color: '#ffc069' }}>
+              Already have an account? Sign in
+            </IonButton>
           </div>
         </div>
 
+        {/* Verification Modal */}
         <IonModal isOpen={showVerificationModal} onDidDismiss={() => setShowVerificationModal(false)}>
           <IonContent className="ion-padding">
             <IonCard style={{ marginTop: '25%' }}>
@@ -197,6 +171,7 @@ const Register: React.FC = () => {
           </IonContent>
         </IonModal>
 
+        {/* Success Modal */}
         <IonModal isOpen={showSuccessModal} onDidDismiss={() => setShowSuccessModal(false)}>
           <IonContent className="ion-padding" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <IonTitle style={{ marginTop: '20%' }}>🎉 Registration Successful</IonTitle>
